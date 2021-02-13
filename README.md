@@ -1,2 +1,2 @@
 # Bounce Ball Game 
-This game created with JS
+This game is created with JS
