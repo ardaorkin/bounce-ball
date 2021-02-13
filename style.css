@@ -1,0 +1,29 @@
+.area {
+  background-color: gold;
+  width: 600px;
+  height: 600px;
+}
+
+.ball {
+  background-color: white;
+  border: 1px solid black;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  position: relative;
+}
+
+.racket {
+  width: 100px;
+  height: 20px;
+  position: relative;
+
+  top: 555px;
+  background-color: cadetblue;
+}
+
+.result {
+  text-align: center;
+  font-size: larger;
+  color: black;
+}
