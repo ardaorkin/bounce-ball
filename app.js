@@ -161,8 +161,17 @@ document.addEventListener("DOMContentLoaded", () => {
     result.style.fontSize = "25px";
     result.style.fontWeight = "bolder";
     result.style.textAlign = "center";
-
     result.innerHTML = "Score: " + score;
+    result.style.display = "flex";
+    result.style.flexDirection = "column";
+    result.style.alignItems = "center";
+
+    const retry = document.createElement("button");
+    retry.classList.add("retry");
+    retry.innerText = "Retry";
+
+    retry.addEventListener("click", () => window.location.reload());
+    result.appendChild(retry);
   }
 
   function controls(event) {
