@@ -111,12 +111,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 30);
   }
 
-  // function hit() {
-  //   const blockArray = Array.from(blocks);
-  //   setInterval(() => {
-  //     blockArray.forEach((block) => console.log(block.offsetLeft, ballLeft));
-  //   }, 30);
-  // }
+  function hit() {
+    const blockArray = Array.from(blocks);
+
+    setInterval(() => {
+      blockArray.forEach((block) => {
+        if (
+          ballTop === 35 &&
+          ball.offsetLeft >= block.offsetLeft &&
+          ball.offsetLeft < block.offsetLeft + 30
+        ) {
+          block.style.display = "none";
+        }
+      });
+    }, 30);
+  }
 
   function turn() {
     if (ballLeft === 580) {
@@ -124,11 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (ballLeft === 0) {
       turnLeft = false;
     }
-
-    if (turnLeft) {
-      ballLeft -= 5;
-    } else {
-      ballLeft += 5;
+    if (!firstFall) {
+      if (turnLeft) {
+        ballLeft -= 5;
+      } else {
+        ballLeft += 5;
+      }
     }
     ball.style.left = ballLeft + "px";
   }
