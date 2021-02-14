@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const counts = document.createElement("div");
   counts.style.marginTop = "30%";
-  counts.style.marginLeft = "45%";
+  counts.style.textAlign = "center";
   counts.style.fontSize = 100 + "px";
   counts.style.fontWeight = "bolder";
   area.appendChild(counts);
