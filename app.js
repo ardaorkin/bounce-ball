@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function fall() {
     clearInterval(riseInterval);
+    ball.style.animation = "turnpin 1s linear infinite";
     fallInterval = setInterval(function () {
       ballTop += 5;
       ball.style.top = ballTop + "px";

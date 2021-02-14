@@ -3,7 +3,12 @@
 }
 
 .ball {
-  background-color: white;
+  background: rgb(0, 255, 224);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 224, 1) 0%,
+    rgba(0, 154, 185, 1) 100%
+  );
   border: 1px solid black;
   width: 20px;
   height: 20px;
@@ -38,4 +43,13 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 25px;
+}
+
+@keyframes turnpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
