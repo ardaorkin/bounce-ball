@@ -83,11 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
       ballTop += 5;
       ball.style.top = ballTop + "px";
       turn();
+
       if (
         ballTop === areaHeight - (ballHeight + racketHeight) &&
-        (ballLeft === racketLeft ||
-          (ballLeft < racketLeft + racketWidth &&
-            ballLeft > racketLeft - racketWidth))
+        (ball.offsetLeft === racket.offsetLeft ||
+          (ball.offsetLeft < racket.offsetLeft + racket.offsetWidth &&
+            ball.offsetLeft > racket.offsetLeft))
       ) {
         rise();
       } else if (ballTop > areaHeight - ballHeight / 2) {
@@ -115,13 +116,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const blockArray = Array.from(blocks);
 
     setInterval(() => {
-      blockArray.forEach((block) => {
+      blockArray.map((block) => {
+        // console.log(block.offsetWidth);
         if (
           ballTop === 35 &&
-          ball.offsetLeft >= block.offsetLeft &&
-          ball.offsetLeft < block.offsetLeft + 30
+          (ball.offsetLeft === block.offsetLeft ||
+            (ball.offsetLeft < block.offsetLeft + block.offsetWidth &&
+              ball.offsetLeft > block.offsetLeft))
         ) {
-          block.style.display = "none";
+          block.style.visibility = "hidden";
         }
       });
     }, 30);
