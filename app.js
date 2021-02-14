@@ -14,13 +14,23 @@ document.addEventListener("DOMContentLoaded", () => {
   let ballHeight = 20;
   let racketHeight = 20;
   let racketWidth = 200;
-  let ballTop = 0;
+  let ballTop = 35;
   let fallInterval;
   let riseInterval;
   let start = true;
+  let firstFall = true;
   let racketLeft = 280;
   let ballLeft = 250;
   let turnLeft = false;
+
+  racket.style.left = racketLeft + "px";
+  racket.style.width = racketWidth + "px";
+  racket.style.height = racketHeight + "px";
+
+  ball.style.left = ballLeft + "px";
+  ball.style.top = 35 + "px";
+  area.style.width = areaWidth + "px";
+  area.style.height = areaHeight + "px";
 
   let blockOrder = document.createElement("div");
   let blockOrderHeight = 10;
@@ -35,14 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let blocks = [];
 
-  racket.style.left = racketLeft + "px";
-  racket.style.width = racketWidth + "px";
-  racket.style.height = racketHeight + "px";
-
-  ball.style.left = ballLeft + "px";
-  area.style.width = areaWidth + "px";
-  area.style.height = areaHeight + "px";
-
   class BlockOrder {
     constructor() {
       this.height = 30;
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.top = 0;
       this.border = "1px solid black";
       this.borderRadius = 5;
-      this.backgroundColor = "white";
+
       this.position = "relative";
 
       let blockCount = areaWidth / this.height;
@@ -60,11 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
         block.style.width = this.width + "px";
         block.style.height = this.height + "px";
         block.style.top = this.top + "px";
-        block.style.backgroundColor = this.backgroundColor;
+        block.style.backgroundColor =
+          "#" + Math.floor(Math.random() * 16777215).toString(16);
         block.style.position = this.position;
-        block.style.left = index * this.width;
         block.style.border = this.border;
         block.style.borderRadius = this.borderRadius + "px";
+        blocks.push(block);
         blockOrder.appendChild(block);
       }
     }
@@ -72,8 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createBlock() {
     let newOrder = new BlockOrder();
-    blocks.push(newOrder);
-    console.log(blocks);
   }
 
   function fall() {
@@ -96,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function rise() {
+    firstFall = false;
     clearInterval(fallInterval);
     riseInterval = setInterval(function () {
       ballTop -= 5;
@@ -103,12 +105,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       turn();
 
-      if (ballTop === blockOrderHeight + blockOrderTop + blockOrderHeight / 2) {
-        alert("Bing");
+      if (ballTop === 35) {
         fall();
       }
     }, 30);
   }
+
+  // function hit() {
+  //   const blockArray = Array.from(blocks);
+  //   setInterval(() => {
+  //     blockArray.forEach((block) => console.log(block.offsetLeft, ballLeft));
+  //   }, 30);
+  // }
 
   function turn() {
     if (ballLeft === 580) {
@@ -160,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (start) {
     createBlock();
     fall();
+    hit();
     document.addEventListener("keydown", controls);
   }
 });
