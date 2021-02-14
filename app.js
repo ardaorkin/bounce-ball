@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let riseInterval;
   let start = true;
   let firstFall = true;
-  let racketLeft = 280;
+  let racketLeft = 200;
   let ballLeft = 250;
   let turnLeft = false;
 
@@ -42,6 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
   blockOrder.style.position = "fixed";
   blockOrder.style.top = blockOrderTop + "px";
   area.appendChild(blockOrder);
+
+  const counts = document.createElement("div");
+  counts.style.marginTop = "30%";
+  counts.style.marginLeft = "45%";
+  counts.style.fontSize = 100 + "px";
+  counts.style.fontWeight = "bolder";
+  area.appendChild(counts);
 
   let blocks = [];
 
@@ -78,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function createBlock() {
     let newOrder = new BlockOrder();
   }
+  createBlock();
 
   function fall() {
     clearInterval(riseInterval);
@@ -196,10 +204,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (start) {
-    createBlock();
+  function countDown() {
+    counts.innerText = 1;
+    for (let index = 2; index < 5; index++) {
+      setTimeout(() => {
+        if (index === 4) {
+          counts.innerText = "GO!";
+        } else {
+          counts.innerHTML = index;
+        }
+      }, (index - 1) * (counts.innerText === "GO!" ? 1 : 1000));
+    }
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(counts.remove());
+      }, 4000);
+    });
+  }
+
+  async function startGame() {
+    const gameWillStart = await countDown();
+
     fall();
     hit();
+
     document.addEventListener("keydown", controls);
+  }
+
+  if (start) {
+    startGame();
   }
 });
