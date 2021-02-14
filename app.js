@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let blocks = [];
 
+  let score = 0;
+
   class BlockOrder {
     constructor() {
       this.height = 30;
@@ -117,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setInterval(() => {
       blockArray.map((block) => {
-        // console.log(block.offsetWidth);
         if (
           ballTop === 35 &&
           (ball.offsetLeft === block.offsetLeft ||
@@ -125,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ball.offsetLeft > block.offsetLeft))
         ) {
           block.style.visibility = "hidden";
+          score += 10;
         }
       });
     }, 30);
@@ -150,10 +152,17 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(fallInterval);
     ball.remove();
     racket.remove();
+    blockOrder.remove();
+    blocks.map((block) => block.remove());
     const result = document.createElement("div");
     area.appendChild(result);
     result.classList.add("result");
-    result.innerHTML = "Game Over";
+    result.style.paddingTop = "30%";
+    result.style.fontSize = "25px";
+    result.style.fontWeight = "bolder";
+    result.style.textAlign = "center";
+
+    result.innerHTML = "Score: " + score;
   }
 
   function controls(event) {
