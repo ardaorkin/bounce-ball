@@ -18,7 +18,8 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   top: 555px;
-  background-color: darkturquoise;
+  border: 1px solid #1870e4;
+  background-color: rgb(3, 182, 182);
 }
 
 .result {
