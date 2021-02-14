@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   racket.classList.add("racket");
   area.appendChild(racket);
 
+  let areaWidth = 600;
+  let areaHeight = 600;
+  let ballHeight = 20;
+  let racketHeight = 20;
+  let racketWidth = 200;
   let ballTop = 0;
   let fallInterval;
   let riseInterval;
@@ -16,8 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let racketLeft = 280;
   let ballLeft = 250;
   let turnLeft = false;
+
   racket.style.left = racketLeft + "px";
+  racket.style.width = racketWidth + "px";
+  racket.style.height = racketHeight + "px";
+
   ball.style.left = ballLeft + "px";
+  area.style.width = areaWidth + "px";
+  area.style.height = areaHeight + "px";
 
   function fall() {
     clearInterval(riseInterval);
@@ -26,12 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
       ball.style.top = ballTop + "px";
       turn();
       if (
-        ballTop === 560 &&
+        ballTop === areaHeight - (ballHeight + racketHeight) &&
         (ballLeft === racketLeft ||
-          (ballLeft < racketLeft + 100 && ballLeft > racketLeft - 100))
+          (ballLeft < racketLeft + racketWidth &&
+            ballLeft > racketLeft - racketWidth))
       ) {
         rise();
-      } else if (ballTop > 575) {
+      } else if (ballTop > areaHeight - ballHeight / 2) {
         gameOver();
       }
     }, 30);
@@ -85,14 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function moveLeft() {
-    if (racketLeft <= 500 && racketLeft > 0) {
+    if (racketLeft <= areaWidth - racketWidth && racketLeft > 0) {
       racketLeft -= 5;
       racket.style.left = racketLeft + "px";
     }
   }
 
   function moveRight() {
-    if (racketLeft >= 0 && racketLeft < 500) {
+    if (racketLeft >= 0 && racketLeft < areaWidth - racketWidth) {
       racketLeft += 5;
       racket.style.left = racketLeft + "px";
     }

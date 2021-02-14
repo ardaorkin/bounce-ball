@@ -1,7 +1,5 @@
 .area {
   background-color: gold;
-  width: 600px;
-  height: 600px;
 }
 
 .ball {
@@ -14,15 +12,13 @@
 }
 
 .racket {
-  width: 100px;
-  height: 20px;
   position: relative;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   top: 555px;
-  background-color: cadetblue;
+  background-color: darkturquoise;
 }
 
 .result {
